@@ -3,7 +3,7 @@
  * Plugin Name: Bambora Online ePay
  * Plugin URI: https://www.epay.dk
  * Description: Bambora Online ePay payment gateway for WooCommerce
- * Version: 5.0.4
+ * Version: 5.0.5
  * Author: Bambora Online
  * Author URI: https://www.epay.dk/epay-payment-solutions
  * Text Domain: bambora-online-classic
@@ -46,6 +46,11 @@ function init_bambora_online_classic() {
          * @param Bambora_Online_Classic_Log
          */
 		private $_boclassic_log;
+
+        /**
+         * @var int
+         */
+        private $paymentcollection;
 
 		/**
          * get_instance
@@ -111,7 +116,8 @@ function init_bambora_online_classic() {
 			$this->title = array_key_exists( 'title', $this->settings ) ? $this->settings['title'] : 'Bambora Online ePay';
 			$this->description = array_key_exists( 'description', $this->settings ) ? $this->settings['description'] : 'Pay using Bambora Online ePay';
 			$this->merchant = array_key_exists( 'merchant', $this->settings ) ? $this->settings['merchant'] : '';
-			$this->windowid = array_key_exists( 'windowid', $this->settings ) ? $this->settings['windowid'] : '1';
+            $this->windowid = array_key_exists( 'windowid', $this->settings ) ? $this->settings['windowid'] : '1';
+            $this->paymentcollection = array_key_exists( 'paymentcollection', $this->settings ) ? $this->settings['paymentcollection'] : '0';
 			$this->md5key = array_key_exists( 'md5key', $this->settings ) ? $this->settings['md5key'] : '';
 			$this->instantcapture = array_key_exists( 'instantcapture', $this->settings ) ? $this->settings['instantcapture'] : 'no';
 			$this->group = array_key_exists( 'group', $this->settings ) ? $this->settings['group'] : '';
@@ -206,6 +212,12 @@ function init_bambora_online_classic() {
 								'description' => 'The ID of the payment window to use.',
 								'default' => '1',
 							),
+                'paymentcollection' => array(
+                                'title' => 'Paymentcollection',
+                                'type' => 'text',
+                                'description' => 'Difference settings options for 0-7',
+                                'default' => '0',
+                ),
 				'md5key' => array(
 								'title' => 'MD5 Key',
 								'type' => 'text',
@@ -416,6 +428,14 @@ function init_bambora_online_classic() {
 			);
 		}
 
+        /**
+         * @param $int
+         */
+        public function set_paymentcollection($int)
+        {
+            $this->paymentcollection = $int;
+        }
+
 		/**
          * Process Refund
          *
@@ -582,7 +602,8 @@ function init_bambora_online_classic() {
 				'windowstate' => "3",
 				'mobile' => Bambora_Online_Classic_Helper::yes_no_to_int( $this->enablemobilepaymentwindow ),
 				'merchantnumber' => $this->merchant,
-				'windowid' => $this->windowid,
+                'windowid' => $this->windowid,
+                'paymentcollection' => $this->paymentcollection,
 				'currency' => $order_currency,
 				'amount' => Bambora_Online_Classic_Helper::convert_price_to_minorunits( $order_total, $minorunits, $this->roundingmode ),
 				'orderid' => $this->clean_order_number($order->get_order_number()),
