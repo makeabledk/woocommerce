@@ -47,11 +47,6 @@ function init_bambora_online_classic() {
          */
 		private $_boclassic_log;
 
-        /**
-         * @var int
-         */
-        private $paymentcollection;
-
 		/**
          * get_instance
          *
@@ -428,14 +423,6 @@ function init_bambora_online_classic() {
 			);
 		}
 
-        /**
-         * @param $int
-         */
-        public function set_paymentcollection($int)
-        {
-            $this->paymentcollection = $int;
-        }
-
 		/**
          * Process Refund
          *
@@ -603,7 +590,7 @@ function init_bambora_online_classic() {
 				'mobile' => Bambora_Online_Classic_Helper::yes_no_to_int( $this->enablemobilepaymentwindow ),
 				'merchantnumber' => $this->merchant,
                 'windowid' => $this->windowid,
-                'paymentcollection' => $this->paymentcollection,
+                'paymentcollection' => $order->get_meta('paymentcollection') !== "" ? $order->get_meta('paymentcollection') : $this->paymentcollection,
 				'currency' => $order_currency,
 				'amount' => Bambora_Online_Classic_Helper::convert_price_to_minorunits( $order_total, $minorunits, $this->roundingmode ),
 				'orderid' => $this->clean_order_number($order->get_order_number()),
