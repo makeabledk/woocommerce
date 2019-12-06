@@ -134,7 +134,7 @@ function init_bambora_online_classic() {
 			add_action( 'woocommerce_api_' . strtolower( get_class() ), array( $this, 'bambora_online_classic_callback' ) );
 			add_action( 'woocommerce_receipt_' . $this->id, array( $this, 'receipt_page' ) );
 
-			if ( is_admin() ) {
+            if ( is_admin() ) {
 				if ( $this->remoteinterface == 'yes' ) {
 					add_action( 'add_meta_boxes', array( $this, 'bambora_online_classic_meta_boxes' ) );
 				}
@@ -583,7 +583,7 @@ function init_bambora_online_classic() {
 			$order_total = Bambora_Online_Classic_Helper::is_woocommerce_3() ? $order->get_total() : $order->order_total;
 			$minorunits = Bambora_Online_Classic_Helper::get_currency_minorunits( $order_currency );
 
-			$epay_args = array(
+            $epay_args = array(
 				'encoding' => 'UTF-8',
 				'cms' => Bambora_Online_Classic_Helper::get_module_header_info(),
 				'windowstate' => "3",
@@ -893,7 +893,7 @@ function init_bambora_online_classic() {
          * @param array $params
          * @return bool|WP_Error
          */
-		protected function process_bambora_online_classic_action( $params ) {
+		public function process_bambora_online_classic_action( $params ) {
 			$failed_message = '';
 			if ( ! $this->validate_bambora_online_classic_action( $params, $failed_message ) ) {
 				return new WP_Error( 'bambora_online_classic_error', sprintf( __( 'The following get parameter was not provided "%s"' ), $failed_message ) );
