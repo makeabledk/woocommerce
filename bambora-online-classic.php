@@ -1,11 +1,10 @@
 <?php
 /**
- * Plugin Name: Bambora Online ePay
+ * Plugin Name: Bambora Online ePay - MK Edit
  * Plugin URI: https://www.epay.dk
  * Description: Bambora Online ePay payment gateway for WooCommerce
  * Version: 5.0.5
- * Author: Bambora Online
- * Author URI: https://www.epay.dk/epay-payment-solutions
+ * Author: Bambora Online - Makeable version
  * Text Domain: bambora-online-classic
  *
  * @author Bambora
