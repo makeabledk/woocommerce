@@ -233,7 +233,7 @@ class Bambora_Online_Classic_Helper
 		$html = '<section>';
 		$html .= '<h3>' . __( 'Thank you for using Bambora Online ePay.', 'bambora-online-classic' ) . '</h3>';
 		$html .= '<p>' . __( 'Please wait...', 'bambora-online-classic' ) . '</p>';
-		$html .= sprintf( '<script type="text/javascript" src="%s" charset="UTF-8"></script>', self::BOCLASSIC_instance()->plugin_url( '/scripts/bambora-online-classic-payment-window.js' ) );
+		$html .= sprintf( '<script type="text/javascript" data-cookieconsent="ignore" src="%s" charset="UTF-8"></script>', self::BOCLASSIC_instance()->plugin_url( '/scripts/bambora-online-classic-payment-window.js?ver=1.00' ) );
 		$html .= sprintf( '<script type="text/javascript" charset="UTF-8">BamboraOnlineClassicPaymentWindow.init(%s);</script>', $json_data );
 		$html .= '<script type="text/javascript" src="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/paymentwindow.js" charset="UTF-8"></script>';
 		$html .= '</section>';
